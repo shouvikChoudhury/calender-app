@@ -3,13 +3,16 @@ import React, { useState } from 'react'
 const EventNew = (props) => {
     const [first, setfirst] = useState("")
     const [second, setsecond] = useState(false)
-
+    const [arr, setarr] = useState([])
     const handleAdd = (e) => {
         e.preventDefault()
         setsecond(true)
-        console.log(props.date, first)
+        setarr([...arr, { date: String(props.date), eventname: first }])
+        console.log(String(props.date), first)
     }
-
+    const filterarr = arr.filter(i =>
+        i.date.toLowerCase() === String(props.date).toLowerCase()
+    )
     return (
         <div className="pt-5">
             <h5>Add event to calender date</h5>
@@ -20,7 +23,9 @@ const EventNew = (props) => {
                     onChange={e => setfirst(e.target.value)} value={first} />
                 <input type="submit" value="Add" />
             </form>
-            {second && (<div><p className=' mt-3'><b><i>Date: {String(props.date)}</i><br /> Event: {first} </b></p></div>)}
+            {second && (filterarr.map((item) => {
+                return (<div><p className='mt-3'><b><i>Date: {item.date}</i><br /> Event: {item.eventname} </b></p></div>)
+            }))}
         </div>
     )
 }
