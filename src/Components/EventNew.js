@@ -16,11 +16,11 @@ const EventNew = (props) => {
             <form onSubmit={handleAdd}>
                 <input type="text" className='w-75' value={props.date} />
                 <br />
-                <input placeholder='Add event' type="text" className='w-75 mt-3'
+                <input required='required' placeholder='Enter calender date event here' type="text" className='w-75 mt-3'
                     onChange={e => setfirst(e.target.value)} value={first} />
                 <input type="submit" value="Add" />
             </form>
-            {second && (<div><p className=' mt-3'><b>Event: {first} ({JSON.stringify(props.date)})</b></p></div>)}
+            {second && (<div><p className=' mt-3'><b><i>Date: {String(props.date)}</i><br /> Event: {first} </b></p></div>)}
         </div>
     )
 }
